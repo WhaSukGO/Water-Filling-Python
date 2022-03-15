@@ -4,6 +4,8 @@ import numpy as np
 
 def water_filling(img):
 
+    original_shape = img.shape
+
     img = cv2.resize(img, (0, 0), fx=0.2, fy=0.2,
                      interpolation=cv2.INTER_LINEAR_EXACT)
 
@@ -72,7 +74,7 @@ def water_filling(img):
 
         w_ = temp
 
-    h, w = img.shape
+    h, w = original_shape
 
     G_ = cv2.resize(G_, (w, h), interpolation=cv2.INTER_LINEAR)
     G_ = G_.astype(np.uint8)
