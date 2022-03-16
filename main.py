@@ -72,7 +72,7 @@ def water_filling(img):
 
         temp[temp < 0] = 0
 
-        w_ = temp
+        w_[1: h - 2, 1: w - 2] = temp[1: h - 2, 1: w - 2]
 
     h, w = original_shape
 
@@ -131,7 +131,7 @@ def incre_filling(h_, original):
 
         temp[temp < 0] = 0
 
-        w_ = temp
+        w_[1: h - 2, 1: w - 2] = temp[1: h - 2, 1: w - 2]
 
     output = 0.85 * original / G_ * 255
     output = output.astype(np.uint8)
@@ -147,15 +147,13 @@ def main():
     y, cr, cb = cv2.split(ycrcb)
 
     G_ = water_filling(y)
-
     G_ = incre_filling(G_, y)
 
-    cv2.imshow("after", G_)
+    merged = cv2.merge([G_, cr, cb], 3)
+    merged = cv2.cvtColor(merged, cv2.COLOR_YCrCb2BGR)
 
-    # merged = cv2.merge([G_, cr, cb], 3)
-    # merged = cv2.cvtColor(merged, cv2.COLOR_YCrCb2BGR)
-
-    cv2.imshow("before", y)
+    cv2.imshow("after", merged)
+    cv2.imshow("before", img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
