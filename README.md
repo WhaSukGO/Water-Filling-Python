@@ -5,3 +5,4 @@ A Python version of [Water-Filling: An Efficient Algorithm for Digitized Documen
 ## Dependency
 
 - OpenCV
+- tqdm

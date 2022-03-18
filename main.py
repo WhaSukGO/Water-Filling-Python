@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+from tqdm import tqdm
 
 
 def water_filling(img):
@@ -38,7 +39,8 @@ def water_filling(img):
     # Btm (y+delta)
     bx, by = X, Y+1
 
-    for t in range(2500):
+    print("[MSG] Water filling in progress ...")
+    for t in tqdm(range(2500)):
         G_ = w_ + h_
 
         # Find peak
@@ -109,7 +111,8 @@ def incre_filling(h_, original):
     tx, ty = X, Y-1
     bx, by = X, Y+1
 
-    for t in range(100):
+    print("[MSG] Incremental filling in progress ...")
+    for t in tqdm(range(100)):
         G_ = w_ + h_
 
         left = -G_[Y, X] + G_[ly, lx]
